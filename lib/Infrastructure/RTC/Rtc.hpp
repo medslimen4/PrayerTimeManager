@@ -7,13 +7,15 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-class RTC : public ITime{
+class RTC : public ITime
+{
 private:
-RTC_DS1307 rtc;
-WiFiUDP ntpUDP;
+    RTC_DS1307 rtc;
+    WiFiUDP ntpUDP;
 
-public :
+public:
     bool SetTimeToRtc() override;
-    int LoadTimeFromRtcAsMin() override ;
-    };
+    int LoadTimeFromRtcAsMin() override;
+    CustomTime getCurrentTime() override;
+};
 #endif // RTC_HPP

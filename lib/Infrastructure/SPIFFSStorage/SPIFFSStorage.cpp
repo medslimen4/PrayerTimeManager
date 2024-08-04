@@ -1,10 +1,13 @@
 #include "SPIFFSStorage.hpp"
-#include<Arduino.h>
+#include <Arduino.h>
 #include <ArduinoJson.h>
 #include <LittleFS.h>
-void SPIFFSStorage::savePrayerTimes(const PrayerTimes& prayerTimes) {
+#include <SPI.h>
+void SPIFFSStorage::savePrayerTimes(const PrayerTimes &prayerTimes)
+{
     File file = SPIFFS.open("/prayer_times.json", "w");
-    if (!file) {
+    if (!file)
+    {
         return;
     }
 
@@ -19,16 +22,19 @@ void SPIFFSStorage::savePrayerTimes(const PrayerTimes& prayerTimes) {
     file.close();
 }
 
-PrayerTimes SPIFFSStorage::loadPrayerTimes() {
+PrayerTimes SPIFFSStorage::loadPrayerTimes()
+{
     PrayerTimes prayerTimes;
     File file = SPIFFS.open("/prayer_times.json", "r");
-    if (!file) {
+    if (!file)
+    {
         return prayerTimes;
     }
 
     StaticJsonDocument<512> doc;
     DeserializationError error = deserializeJson(doc, file);
-    if (!error) {
+    if (!error)
+    {
         prayerTimes.fajr = doc["fajr"].as<String>();
         prayerTimes.dohr = doc["dohr"].as<String>();
         prayerTimes.asr = doc["asr"].as<String>();

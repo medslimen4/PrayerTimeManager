@@ -1,10 +1,10 @@
 #include "ActivateRelais.hpp"
 
-void ActivateRelais::triggerRelay() {
+void ActivateRelais::RelayOn()
+{
 
-
-  digital->write(relayControlPin, 1);
-  //delay(3000);  // Relay on for 3 minutes
   digital->write(relayControlPin, 0);
-
+}
+void ActivateRelais::RelayOff(){
+  digital->write(relayControlPin, 1);
 }
